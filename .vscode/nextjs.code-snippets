@@ -1,0 +1,37 @@
+{
+  "New Tsx": {
+    "prefix": "~tsx",
+    "body": [
+      "import \"./styles.scss\";",
+      "",
+      "interface I${1:Component}Props {  }",
+      "",
+      "const ${1:Component}: React.FC<I${1:Component}Props> = (props) => {",
+      "",
+      "  return (",
+      "    <div>",
+      "    ",
+      "    </div>",
+      "  )",
+      "}",
+      "",
+      "export default ${1:Component};"
+    ],
+    "description": "Create a new Component"
+  },
+
+  "Add TSX": {
+    "prefix": "~atsx",
+    "body": [
+      "const ${1:Component}: React.FC<{}> = (props) => {",
+      "",
+      "  return (",
+      "    <div>",
+      "    ",
+      "    </div>",
+      "  )",
+      "}"
+    ],
+    "description": "Create a new Component"
+  }
+}

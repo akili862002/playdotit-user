@@ -1,0 +1,21 @@
+{
+  "files.exclude": {
+    "node_modules": true
+  },
+  "editor.formatOnSave": true,
+  "[javascriptreact, typescript, typescriptreact, scss, css, json ]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescriptreact, json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "search.exclude": {
+    "**/package-lock.json": true,
+    "**/yarn.lock": true
+  },
+  "editor.tabSize": 2,
+  "editor.autoClosingQuotes": "always",
+  "cSpell.ignoreWords": ["ISVG"]
+}
