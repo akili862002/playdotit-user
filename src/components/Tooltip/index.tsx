@@ -16,7 +16,7 @@ const Tooltip: React.FC<ITooltipProps> = ({
     >
       {children}
       {text && (
-        <p className="tooltip-text -bottom-3 move-center-x rounded-4 absolute z-50 invisible px-1 text-xs text-center transition rounded-sm opacity-0 whitespace-nowrap bg-black text-white">
+        <p className="absolute z-50 invisible px-1 text-xs text-center text-white transition bg-black rounded-sm opacity-0 tooltip-text -bottom-3 move-center-x rounded-4 whitespace-nowrap">
           {text}
         </p>
       )}

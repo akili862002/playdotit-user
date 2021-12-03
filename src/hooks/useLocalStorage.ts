@@ -27,7 +27,6 @@ function useLocalStorage<T>(key: string, initialValue: T) {
       const data = await asyncStringify(valueToStore);
       window.localStorage.setItem(key, data);
       callback?.();
-      console.log(`[localStorage] set to [${key}]\n`, { data });
 
       setStoredValue(valueToStore);
     } catch (error) {

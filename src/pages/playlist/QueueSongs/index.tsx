@@ -1,9 +1,7 @@
 import PlaylistSongCard from "components/PlaylistSongCard";
-import { fakePlaylist } from "constants/fakePlaylist";
 import { SortableContainer, SortEnd } from "react-sortable-hoc";
 import ListLayout from "layouts/List";
 import { IPlaylist } from "typings";
-import { randomId } from "util/randomId";
 import { arrayMove } from "util/arrayMove";
 import useLocalStorage from "hooks/useLocalStorage";
 import { RouteComponentProps, withRouter } from "react-router";
@@ -17,7 +15,7 @@ const QueueSongs: React.FC<IQueueSongsProps> = ({ match }) => {
 
   const handleSortEnd = ({ oldIndex, newIndex }: SortEnd) => {
     if (!playlist) return;
-    playlist.songs = arrayMove(fakePlaylist.songs, oldIndex, newIndex);
+    playlist.songs = arrayMove(playlist.songs, oldIndex, newIndex);
     setPlaylist({ ...playlist });
   };
 
@@ -44,7 +42,7 @@ const RenderListItems = SortableContainer(
     if (!playlist) return null;
 
     return (
-      <ul className="w-full flex flex-col">
+      <ul className="flex flex-col w-full">
         {playlist?.songs?.map((song, index) => (
           <PlaylistSongCard
             index={index}

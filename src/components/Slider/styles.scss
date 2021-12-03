@@ -1,0 +1,22 @@
+input.slider {
+  width: 100%;
+  -webkit-appearance: none;
+  background: none;
+
+  &:focus {
+    outline: none;
+  }
+
+  /* Chrome & Safari */
+  &::-webkit-slider-runnable-track {
+    background: none;
+  }
+
+  &::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    @apply w-1.5 h-1.5  rounded-full cursor-pointer bg-black;
+    &:active {
+      transform: scale(0.9);
+    }
+  }
+}
