@@ -1,4 +1,4 @@
-import MainLayout from "layouts/MainLayout";
+import MainLayout from "layouts/Main";
 import { lazy, Suspense } from "react";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import "./styles/index.scss";

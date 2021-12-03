@@ -1,5 +1,4 @@
 import Header from "components/Header";
-import "./styles.scss";
 
 interface IMainLayoutProps {}
 
@@ -7,7 +6,7 @@ const MainLayout: React.FC<IMainLayoutProps> = ({ children }) => {
   return (
     <>
       <Header />
-      <main className="main-layout__container">{children}</main>
+      <main className="max-w-md w-full h-full px-2">{children}</main>
     </>
   );
 };

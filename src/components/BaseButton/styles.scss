@@ -1,0 +1,7 @@
+button.base-button {
+  &:active,
+  &:focus-visible {
+    transform: scale(0.97);
+    outline: none;
+  }
+}
