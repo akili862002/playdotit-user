@@ -1,0 +1,46 @@
+export interface IYoutubeSearchResponse {
+  kind: string;
+  etag: string;
+  nextPageToken: string;
+  regionCode: string;
+  pageInfo: {
+    totalResults: number;
+    resultsPerPage: number;
+  };
+  items: IYoutubeSearchItem[];
+}
+
+export interface IYoutubeSearchItem {
+  kind: string;
+  etag: string;
+  id: {
+    kind: string;
+    videoId: string; // Important
+  };
+  snippet: {
+    publishedAt: string; // Date type string
+    channelId: string;
+    title: string;
+    description: string;
+    thumbnails: {
+      default: {
+        url: string;
+        width: number;
+        height: number;
+      };
+      medium: {
+        url: string;
+        width: number;
+        height: number;
+      };
+      high: {
+        url: string;
+        width: number;
+        height: number;
+      };
+    };
+    channelTitle: string;
+    liveBroadcastContent: string;
+    publishTime: string; // string date
+  };
+}

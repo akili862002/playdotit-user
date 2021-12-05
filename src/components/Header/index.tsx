@@ -1,13 +1,14 @@
 import SVG from "components/SVG";
-import "./styles.scss";
+import { useState } from "react";
+import FloatingSearch from "./FloatingSearch";
 
 interface IHeaderProps {}
 
 const Header: React.FC<IHeaderProps> = props => {
   return (
-    <header className="main-header">
+    <header className="max-w-md w-full h-5.5 flex flex-row justify-between items-center">
       <a href="/">
-        <SVG name="common/logo" className="logo" />
+        <SVG name="common/logo" className="w-auto h-3" />
       </a>
       <SearchBox />
     </header>
@@ -17,10 +18,21 @@ const Header: React.FC<IHeaderProps> = props => {
 export default Header;
 
 const SearchBox: React.FC<{}> = props => {
+  const [isOpenSearch, setIsOpenSearch] = useState(true);
+
   return (
-    <div className="search-box__container">
-      <SVG name="common/search" className="search-box__icon" />
-      <p className="placeholder">Find my song</p>
-    </div>
+    <>
+      <div
+        onClick={() => setIsOpenSearch(!isOpenSearch)}
+        className="cursor-pointer bg-alice-blue  text-sm text-silver w-7/12 flex flex-row items-center px-1 py-0.5 gap-1.5 rounded-4"
+      >
+        <SVG name="common/search" className="search-box__icon" />
+        <p className="placeholder">Find my song</p>
+      </div>
+      <FloatingSearch
+        open={isOpenSearch}
+        onClose={() => setIsOpenSearch(false)}
+      />
+    </>
   );
 };

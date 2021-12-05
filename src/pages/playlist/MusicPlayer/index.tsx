@@ -1,30 +1,57 @@
 import Player from "components/Player";
-import { fakePlaylist } from "constants/fakePlaylist";
 import { useState } from "react";
-import { IPlaylist, ISong } from "typings";
+import PlayingGif from "assets/gif/playing.gif";
+import PlayIcon from "assets/svg/player/white-play.svg";
+import { useSelector } from "react-redux";
+import { IRootState } from "redux/store";
+import SongSkeletonImage from "assets/jpg/skeleton.jpg";
+import { setPlaying } from "redux/slices/playlist";
 
 interface IMusicPlayerProps {}
 
 const MusicPlayer: React.FC<IMusicPlayerProps> = props => {
-  const [currentSong, setCurrentSong] = useState<ISong>(fakePlaylist.songs[0]);
-  const [playlist, setPlaylist] = useState<IPlaylist>(fakePlaylist);
+  const { playlist, currentSong, playing } = useSelector(
+    (state: IRootState) => state.playlist,
+  );
 
   return (
     <section className="grid w-full grid-cols-12 gap-2 ">
       <div className="flex flex-col items-center w-full col-span-4">
-        <div className="w-full aspect-w-1 aspect-h-1">
+        <div
+          className={`w-full aspect-w-1 relative aspect-h-1 overflow-hidden transition-all duration-700 group ${
+            playing ? "animate-spin-slow " : ""
+          }`}
+          style={{ borderRadius: playing ? "999px" : "15px" }}
+        >
           <img
-            src={currentSong.thumbnail}
-            alt={currentSong.name}
-            className="object-cover w-full h-full shadow-md pointer-events-none select-none rounded-15"
+            src={currentSong?.thumbnail || SongSkeletonImage}
+            alt={currentSong?.name}
+            className="object-cover w-full h-full transition duration-500 transform shadow-md pointer-events-none select-none group-hover:scale-110"
           />
+          {playing ? (
+            <PlayingIconAnimation
+              onClick={() => {
+                setPlaying(false);
+              }}
+            />
+          ) : (
+            <PlayButton
+              onClick={() => {
+                currentSong && setPlaying(true);
+              }}
+            />
+          )}
         </div>
-        <h1 className="mt-1.5 text-3xl font-bold">{playlist.name}</h1>
+        <h1 className="mt-1.5 text-3xl font-bold">{playlist?.name}</h1>
       </div>
       <div className="flex flex-col justify-between w-full col-span-8">
         <div>
-          <h2 className="text-5xl font-bold">{currentSong.name}</h2>
-          <h3 className="text-gray text-sm -mt-0.5">{currentSong.author}</h3>
+          <h2 className="text-5xl font-bold">
+            {currentSong?.name || "Waiting..."}
+          </h2>
+          <h3 className="text-gray text-sm -mt-0.5">
+            {currentSong?.author || "Select your music"}
+          </h3>
         </div>
         <Player />
       </div>
@@ -33,3 +60,31 @@ const MusicPlayer: React.FC<IMusicPlayerProps> = props => {
 };
 
 export default MusicPlayer;
+
+const PlayingIconAnimation: React.FC<{ onClick?: () => void }> = ({
+  onClick,
+}) => {
+  return (
+    <div
+      onClick={onClick}
+      className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-50 cursor-pointer"
+    >
+      <div className="absolute flex items-center justify-center w-4 h-4 transform -translate-x-1/2 -translate-y-1/2 border border-white border-solid rounded-full left-1/2 top-1/2">
+        <img className="w-2 h-2" src={PlayingGif} alt="" />
+      </div>
+    </div>
+  );
+};
+
+const PlayButton: React.FC<{ onClick?: () => void }> = ({ onClick }) => {
+  return (
+    <div
+      onClick={onClick}
+      className="absolute top-0 left-0 hidden w-full h-full bg-black bg-opacity-50 cursor-pointer group-hover:block"
+    >
+      <div className="absolute flex items-center justify-center w-4 h-4 transform -translate-x-1/2 -translate-y-1/2 border border-white border-solid rounded-full left-1/2 top-1/2">
+        <img className="w-1.5 h-1.5" src={PlayIcon} alt="" />
+      </div>
+    </div>
+  );
+};

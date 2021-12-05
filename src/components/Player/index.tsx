@@ -3,28 +3,21 @@ import IconButton from "components/IconButton";
 import Slider from "components/Slider";
 import Spinner from "components/Spinner";
 import SVG from "components/SVG";
-import { useRef, useState } from "react";
+import { Dispatch, SetStateAction, useRef, useState } from "react";
 import ReactPlayer from "react-player";
+import { useDispatch, useSelector } from "react-redux";
+import { setPlaying } from "redux/slices/playlist";
+import { IRootState } from "redux/store";
 
 interface IPlayerProps {}
 
-const formatSecToMin = (seconds: number) => {
-  if (isNaN(seconds)) {
-    return `00:00`;
-  }
-  const date = new Date(seconds * 1000);
-  const hh = date.getUTCHours();
-  const mm = date.getUTCMinutes();
-  const ss = date.getUTCSeconds().toString().padStart(2, "0");
-  if (hh) {
-    return `${hh}:${mm.toString().padStart(2, "0")}:${ss}`;
-  }
-  return `${mm}:${ss}`;
-};
-
-const Player: React.FC<IPlayerProps> = props => {
+const Player: React.FC<IPlayerProps> = () => {
+  const dispatch = useDispatch();
+  const { playing, currentSong } = useSelector(
+    (state: IRootState) => state.playlist,
+  );
+  const { youtubeURL } = currentSong || {};
   const [loading, setLoading] = useState(true);
-  const [playing, setPlaying] = useState(false);
   const [loop, setLoop] = useState(false);
   const [duration, setDuration] = useState(0);
   const [playedSeconds, setPlayedSeconds] = useState(0);
@@ -35,20 +28,20 @@ const Player: React.FC<IPlayerProps> = props => {
       <div className="absolute w-1 h-1 opacity-0 pointer-events-none">
         <ReactPlayer
           ref={playerRef}
-          url="https://youtu.be/M-P4QBt-FWw"
+          url={youtubeURL}
           controls={false}
           playing={playing}
           playsinline={playing}
           onEnded={() => {
             setTimeout(() => {
               setPlayedSeconds(0);
-              setPlaying(false);
+              dispatch(setPlaying(false));
             }, 1000);
           }}
           loop={loop}
           pip={false}
           onReady={({ getDuration }) => {
-            console.log("Ready!, ");
+            console.log("Ready!");
             setDuration(getDuration());
             setLoading(false);
           }}
@@ -90,8 +83,8 @@ const Player: React.FC<IPlayerProps> = props => {
             <BaseButton
               className="flex items-center justify-center w-7 h-7"
               onClick={() => {
-                if (loading) return;
-                setPlaying(!playing);
+                if (loading || !currentSong) return;
+                dispatch(setPlaying(!playing));
               }}
             >
               {loading ? (
@@ -117,3 +110,17 @@ const Player: React.FC<IPlayerProps> = props => {
 };
 
 export default Player;
+
+const formatSecToMin = (seconds: number) => {
+  if (isNaN(seconds)) {
+    return `00:00`;
+  }
+  const date = new Date(seconds * 1000);
+  const hh = date.getUTCHours();
+  const mm = date.getUTCMinutes();
+  const ss = date.getUTCSeconds().toString().padStart(2, "0");
+  if (hh) {
+    return `${hh}:${mm.toString().padStart(2, "0")}:${ss}`;
+  }
+  return `${mm}:${ss}`;
+};

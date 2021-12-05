@@ -64,6 +64,7 @@ module.exports = {
     },
     maxWidth: {
       md: "800px",
+      sm: "600px",
     },
     borderRadius: {
       4: "4px",
@@ -77,6 +78,13 @@ module.exports = {
         "auto-1fr": "auto 1fr",
         "1fr-auto": "1fr auto",
       },
+      animation: {
+        "spin-slow": "spin 30s linear infinite",
+      },
+      zIndex: {
+        100: "100",
+        110: 110,
+      },
     },
   },
   variants: {
@@ -84,6 +92,7 @@ module.exports = {
       borderColor: ["group-focus"],
       visibility: ["group-focus"],
       display: ["group-hover"],
+      scale: ["group-hover"],
     },
   },
   plugins: [
