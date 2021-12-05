@@ -1,10 +1,14 @@
-import { Fragment, PropsWithChildren } from "react";
+import { Fragment, PropsWithChildren, useState } from "react";
 import { Dialog as DialogUI, Transition } from "@headlessui/react";
 import SVG from "components/SVG";
 import { useDebounced } from "hooks/useDebounced";
 import axios, { AxiosResponse } from "axios";
 import { YOUTUBE_API_KEY } from "constants/env";
-import { IYoutubeSearchItem, IYoutubeSearchResponse } from "typings";
+import { ISong, IYoutubeSearchItem, IYoutubeSearchResponse } from "typings";
+import { useDispatch } from "react-redux";
+import { enqueueSongToPlaylist } from "redux/slices/playlist";
+import { randomId } from "util/randomId";
+import Spinner from "components/Spinner";
 
 interface ILoginDialogProps {
   open: boolean;
@@ -75,6 +79,8 @@ const FloatingSearch = (
 export default FloatingSearch;
 
 const MainContent: React.FC<{ onClose: () => void }> = ({ onClose }) => {
+  const dispatch = useDispatch();
+  const [loading, setLoading] = useState(false);
   const { searchResults, inputText, setInputText } =
     useDebounced<IYoutubeSearchItem>(async text => {
       if (!text) return [];
@@ -82,16 +88,25 @@ const MainContent: React.FC<{ onClose: () => void }> = ({ onClose }) => {
         const response: AxiosResponse<IYoutubeSearchResponse> = await axios.get(
           `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=6&q=${text}&type=video&key=${YOUTUBE_API_KEY}`,
         );
+        setLoading(false);
         return response?.data?.items;
       } catch (error) {
         console.error(error);
+        setLoading(false);
         return [];
       }
     });
 
   return (
     <>
-      <Searchbox inputText={inputText} onChange={text => setInputText(text)} />
+      <Searchbox
+        loading={loading}
+        inputText={inputText}
+        onChange={text => {
+          if (!loading) setLoading(true);
+          setInputText(text);
+        }}
+      />
       <div className="flex flex-col w-full gap-1 mt-2">
         {searchResults.result?.map(item => (
           <SearchResultItem
@@ -100,6 +115,14 @@ const MainContent: React.FC<{ onClose: () => void }> = ({ onClose }) => {
             onClick={() => {
               onClose();
               setInputText("");
+              const song: ISong = {
+                _id: randomId(),
+                name: item.snippet.title,
+                author: item.snippet.channelTitle,
+                thumbnail: item.snippet.thumbnails.medium.url,
+                youtubeURL: `https://www.youtube.com/watch?v=${item.id.videoId}`,
+              };
+              dispatch(enqueueSongToPlaylist(song));
             }}
           />
         ))}
@@ -133,15 +156,20 @@ const SearchResultItem: React.FC<{
 };
 
 const Searchbox: React.FC<{
+  loading: boolean;
   inputText: string;
   onChange: (text: string) => void;
-}> = ({ onChange, inputText }) => {
+}> = ({ onChange, inputText, loading }) => {
   return (
     <label
       className="bg-white w-full grid items-center pr-1.5 pl-0.5 rounded-8 py-1.5 shadow-md"
       style={{ gridTemplateColumns: "40px 1fr" }}
     >
-      <SVG name="common/search" className="w-2.5 h-2.5 ml-1" />
+      {loading && inputText ? (
+        <Spinner size={24} className="w-2.5 h-2.5 ml-1" />
+      ) : (
+        <SVG name="common/search" className="w-2.5 h-2.5 ml-1" />
+      )}
       <input
         value={inputText}
         className="w-full ml-1 text-lg font-medium outline-none bg-none "

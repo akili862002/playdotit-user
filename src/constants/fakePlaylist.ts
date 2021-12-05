@@ -2,8 +2,9 @@ import { IPlaylist } from "typings";
 import { randomId } from "util/randomId";
 
 export const fakePlaylist: IPlaylist = {
+  _id: randomId(),
   name: "My album",
-  createdAt: new Date(),
+  createdAt: new Date().toString(),
   songs: [
     {
       _id: randomId(),

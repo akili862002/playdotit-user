@@ -17,5 +17,5 @@
   },
   "editor.tabSize": 2,
   "editor.autoClosingQuotes": "always",
-  "cSpell.ignoreWords": ["ISVG", "craco", "tailwindcss", "playsinline", "reduxjs", "headlessui", "semibold"]
+  "cSpell.ignoreWords": ["ISVG", "craco", "tailwindcss", "playsinline", "reduxjs", "headlessui", "toastify", "semibold"]
 }

@@ -1,8 +1,14 @@
 import { SVGProps } from "react";
 
-interface ISpinnerProps extends SVGProps<SVGSVGElement> {}
+interface ISpinnerProps extends SVGProps<SVGSVGElement> {
+  size?: number;
+}
 
-const Spinner: React.FC<ISpinnerProps> = ({ className, ...rest }) => {
+const Spinner: React.FC<ISpinnerProps> = ({
+  className,
+  size = 50,
+  ...rest
+}) => {
   return (
     <svg
       className={`animate-spin ${className}`}
@@ -11,7 +17,7 @@ const Spinner: React.FC<ISpinnerProps> = ({ className, ...rest }) => {
       viewBox="0 0 24 24"
       width="24"
       height="24"
-      style={{ width: 50, height: 50 }}
+      style={{ width: size, height: size }}
       {...rest}
     >
       <circle

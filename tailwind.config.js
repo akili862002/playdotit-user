@@ -65,6 +65,9 @@ module.exports = {
     maxWidth: {
       md: "800px",
       sm: "600px",
+      45: "450px",
+      20: "200px",
+      10: "100px",
     },
     borderRadius: {
       4: "4px",

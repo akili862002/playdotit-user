@@ -37,6 +37,7 @@ const MusicPlayer: React.FC<IMusicPlayerProps> = props => {
           ) : (
             <PlayButton
               onClick={() => {
+                console.log("Click");
                 currentSong && setPlaying(true);
               }}
             />
@@ -46,10 +47,13 @@ const MusicPlayer: React.FC<IMusicPlayerProps> = props => {
       </div>
       <div className="flex flex-col justify-between w-full col-span-8">
         <div>
-          <h2 className="text-5xl font-bold">
+          <h2
+            className="text-5xl font-bold paragraph-with-2-line"
+            style={{ lineHeight: "1.1" }}
+          >
             {currentSong?.name || "Waiting..."}
           </h2>
-          <h3 className="text-gray text-sm -mt-0.5">
+          <h3 className="text-gray text-sm mt-0.5">
             {currentSong?.author || "Select your music"}
           </h3>
         </div>
@@ -61,12 +65,12 @@ const MusicPlayer: React.FC<IMusicPlayerProps> = props => {
 
 export default MusicPlayer;
 
-const PlayingIconAnimation: React.FC<{ onClick?: () => void }> = ({
+const PlayingIconAnimation: React.FC<{ onClick: () => void }> = ({
   onClick,
 }) => {
   return (
     <div
-      onClick={onClick}
+      onClick={() => onClick()}
       className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-50 cursor-pointer"
     >
       <div className="absolute flex items-center justify-center w-4 h-4 transform -translate-x-1/2 -translate-y-1/2 border border-white border-solid rounded-full left-1/2 top-1/2">
@@ -76,10 +80,10 @@ const PlayingIconAnimation: React.FC<{ onClick?: () => void }> = ({
   );
 };
 
-const PlayButton: React.FC<{ onClick?: () => void }> = ({ onClick }) => {
+const PlayButton: React.FC<{ onClick: () => void }> = ({ onClick }) => {
   return (
     <div
-      onClick={onClick}
+      onClick={() => onClick()}
       className="absolute top-0 left-0 hidden w-full h-full bg-black bg-opacity-50 cursor-pointer group-hover:block"
     >
       <div className="absolute flex items-center justify-center w-4 h-4 transform -translate-x-1/2 -translate-y-1/2 border border-white border-solid rounded-full left-1/2 top-1/2">

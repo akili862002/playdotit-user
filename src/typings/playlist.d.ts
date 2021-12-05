@@ -1,6 +1,7 @@
 export interface IPlaylist {
+  _id: string;
   name: string;
-  createdAt: Date;
+  createdAt: string;
   songs: ISong[];
 }
 

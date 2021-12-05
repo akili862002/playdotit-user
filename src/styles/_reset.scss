@@ -8,18 +8,12 @@
 
 html,
 body {
-  height: 100vh;
-  box-sizing: border-box;
-}
-
-html {
-  font-size: 100%;
-  @media screen and (max-width: 600px) {
-    font-size: 70%;
-  }
+  width: 100%;
+  overflow: auto;
 }
 
 body {
+  position: relative;
   font-family: "Inter", "Inter var", ui-sans-serif, system-ui, -apple-system,
     "BlinkMacSystemFont", "Segoe UI", "Roboto", "Helvetica Neue", "Arial",
     "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
@@ -28,7 +22,6 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 0 15px;
   }
 }
 

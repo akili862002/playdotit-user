@@ -1,5 +1,8 @@
 import SVG from "components/SVG";
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setOpenFloatingSearch } from "redux/slices/common";
+import { IRootState } from "redux/store";
 import FloatingSearch from "./FloatingSearch";
 
 interface IHeaderProps {}
@@ -18,20 +21,23 @@ const Header: React.FC<IHeaderProps> = props => {
 export default Header;
 
 const SearchBox: React.FC<{}> = props => {
-  const [isOpenSearch, setIsOpenSearch] = useState(true);
+  const dispatch = useDispatch();
+  const { isOpenFloatingSearch } = useSelector(
+    (state: IRootState) => state.common,
+  );
 
   return (
     <>
       <div
-        onClick={() => setIsOpenSearch(!isOpenSearch)}
+        onClick={() => dispatch(setOpenFloatingSearch(true))}
         className="cursor-pointer bg-alice-blue  text-sm text-silver w-7/12 flex flex-row items-center px-1 py-0.5 gap-1.5 rounded-4"
       >
         <SVG name="common/search" className="search-box__icon" />
         <p className="placeholder">Find my song</p>
       </div>
       <FloatingSearch
-        open={isOpenSearch}
-        onClose={() => setIsOpenSearch(false)}
+        open={isOpenFloatingSearch}
+        onClose={() => dispatch(setOpenFloatingSearch(false))}
       />
     </>
   );
