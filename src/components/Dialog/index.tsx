@@ -28,12 +28,8 @@ const Dialog = (props: PropsWithChildren<ILoginDialogProps>): JSX.Element => {
 
   return (
     <Transition appear show={open} as={Fragment}>
-      <DialogUI
-        as="div"
-        className="fixed inset-0 overflow-y-auto z-100"
-        onClose={handleClose}
-      >
-        <div className="min-h-screen px-2 text-center">
+      <DialogUI as="div" className="fixed inset-0 z-100" onClose={handleClose}>
+        <div className="px-2 text-center">
           <Transition.Child
             as={Fragment}
             enter="ease-out duration-300"
@@ -67,7 +63,7 @@ const Dialog = (props: PropsWithChildren<ILoginDialogProps>): JSX.Element => {
           >
             <div
               className={`
-              inline-block my-8  text-left align-middle transition-all transform rounded-md shadow-lg bg-primary-3
+              inline-block text-left align-middle transition-all transform 
               ${sizes[size]}
               ${className}
             `}

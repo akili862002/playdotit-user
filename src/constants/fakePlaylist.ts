@@ -1,5 +1,5 @@
 import { IPlaylist } from "typings";
-import { randomId } from "util/randomId";
+import { randomId } from "util/random";
 
 export const fakePlaylist: IPlaylist = {
   _id: randomId(),

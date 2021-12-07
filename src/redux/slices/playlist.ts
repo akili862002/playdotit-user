@@ -8,6 +8,8 @@ interface IPlaylistState {
   playlist: IPlaylist;
   currentSong: ISong | null;
   playing: boolean;
+  isSync: boolean;
+  isShuffle: boolean;
 }
 
 const initialState: IPlaylistState = {
@@ -19,6 +21,8 @@ const initialState: IPlaylistState = {
   },
   currentSong: null,
   playing: false,
+  isSync: false,
+  isShuffle: false,
 };
 
 export const playlistSlices = createSlice({
@@ -28,12 +32,36 @@ export const playlistSlices = createSlice({
     setPlaylist: (state, action: PayloadAction<IPlaylist>) => {
       state.playlist = action.payload;
     },
-    setCurrentSong: (state, action: PayloadAction<ISong>) => {
-      state.currentSong = action.payload;
-      state.playing = true;
+    setCurrentSong: (
+      state,
+      action: PayloadAction<{ song: ISong; playing?: boolean }>,
+    ) => {
+      const { song, playing = true } = action.payload;
+      state.currentSong = song;
+      state.playing = playing;
+
+      // Set current playing song to bottom, and change other
+      state.playlist.songs = arrayMove(
+        state.playlist.songs,
+        0,
+        state.playlist.songs.length,
+      );
+      // Every current playing song will be on top!
+      state.playlist.songs = arrayMove(
+        state.playlist.songs,
+        state.playlist.songs.findIndex(item => item._id === song._id),
+        0,
+      );
+      saveDataToLocalStorage(state.playlist._id, state.playlist);
     },
     setPlaying: (state, action: PayloadAction<boolean>) => {
       state.playing = action.payload;
+    },
+    setSync: (state, action: PayloadAction<boolean>) => {
+      state.isSync = action.payload;
+    },
+    setShuffle: (state, action: PayloadAction<boolean>) => {
+      state.isShuffle = action.payload;
     },
     enqueueSongToPlaylist: (state, action: PayloadAction<ISong>) => {
       if (!state.playlist?.songs) return;
@@ -69,7 +97,6 @@ export const playlistSlices = createSlice({
       );
       saveDataToLocalStorage(state.playlist._id, state.playlist);
     },
-
     savePlaylist: state => {
       saveDataToLocalStorage(state.playlist._id, state.playlist);
     },
@@ -85,6 +112,8 @@ export const {
   setPlaylist,
   setCurrentSong,
   setPlaying,
+  setSync,
+  setShuffle,
   enqueueSongToPlaylist,
   moveItemDnD,
   deleteSong,

@@ -33,5 +33,25 @@
       "}"
     ],
     "description": "Create a new Component"
-  }
+  },
+  "New Icon": {
+    "prefix": "~icon",
+    "body": [
+      "/**",
+      " * @TODO",
+      " *  [ ] convert svg to jsx - Come here: https://magic.reactjs.net/htmltojsx.html",
+      " *  [ ] replace all fill=\"...\" to  fill=\"currentColor\" (except fill=none)",
+      " *  [ ] add {...props} to <svg >",
+      "*/",
+      "",
+      "import { IIconSVGProps } from \"typings\";",
+      "",
+      "const ${1:Component}Icon: React.FC<IIconSVGProps> = props => (",
+      "  ${2}",
+      ")",
+      "",
+      "export default ${1:Component}Icon;"
+    ],
+    "description": "Create a new Component"
+  },
 }

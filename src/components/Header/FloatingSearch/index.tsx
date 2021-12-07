@@ -7,8 +7,9 @@ import { YOUTUBE_API_KEY } from "constants/env";
 import { ISong, IYoutubeSearchItem, IYoutubeSearchResponse } from "typings";
 import { useDispatch } from "react-redux";
 import { enqueueSongToPlaylist } from "redux/slices/playlist";
-import { randomId } from "util/randomId";
+import { randomId } from "util/random";
 import Spinner from "components/Spinner";
+import { htmlDecode } from "util/htmlDecode";
 
 interface ILoginDialogProps {
   open: boolean;
@@ -27,11 +28,7 @@ const FloatingSearch = (
 
   return (
     <Transition appear show={open} as={Fragment}>
-      <DialogUI
-        as="div"
-        className="fixed inset-0 overflow-y-auto z-100"
-        onClose={handleClose}
-      >
+      <DialogUI as="div" className="fixed inset-0 z-100" onClose={handleClose}>
         <div className="min-h-screen px-2 text-center">
           <Transition.Child
             as={Fragment}
@@ -63,8 +60,8 @@ const FloatingSearch = (
           >
             <div
               className={`
-              inline-block mt-8  text-left align-middle transition-all transform rounded-md shadow-lg 
-              w-full max-w-sm h-full
+              inline-block mt-8  text-left align-middle transition-all transform  
+              w-full max-w-sm 
             `}
             >
               <MainContent onClose={onClose} />
@@ -117,7 +114,7 @@ const MainContent: React.FC<{ onClose: () => void }> = ({ onClose }) => {
               setInputText("");
               const song: ISong = {
                 _id: randomId(),
-                name: item.snippet.title,
+                name: htmlDecode(item.snippet.title) || "",
                 author: item.snippet.channelTitle,
                 thumbnail: item.snippet.thumbnails.medium.url,
                 youtubeURL: `https://www.youtube.com/watch?v=${item.id.videoId}`,
@@ -147,7 +144,7 @@ const SearchResultItem: React.FC<{
     >
       <SVG name="common/dvd" />
       <div>
-        <p className="text-lg font-semibold text-black">{title}</p>
+        <p className="text-lg font-semibold text-black">{htmlDecode(title)}</p>
         <p className="text-xs text-gray">{channelTitle}</p>
       </div>
       <SVG name="common/add" />

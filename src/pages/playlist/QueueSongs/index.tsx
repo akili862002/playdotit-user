@@ -9,6 +9,7 @@ import { deleteSong, moveItemDnD, setCurrentSong } from "redux/slices/playlist";
 import BaseButton from "components/BaseButton";
 import SVG from "components/SVG";
 import { setOpenFloatingSearch } from "redux/slices/common";
+import { toast } from "react-toastify";
 
 interface IQueueSongsProps extends RouteComponentProps {}
 
@@ -16,6 +17,7 @@ const QueueSongs: React.FC<IQueueSongsProps> = ({ match }) => {
   const dispatch = useDispatch();
 
   const handleSortEnd = ({ oldIndex, newIndex }: SortEnd) => {
+    if (newIndex === 0) return toast.error("Cannot replace the playing song!");
     dispatch(moveItemDnD({ from: oldIndex, to: newIndex }));
   };
 
@@ -29,6 +31,7 @@ const QueueSongs: React.FC<IQueueSongsProps> = ({ match }) => {
         helperClass="object-dragging"
         distance={1}
         onSortEnd={handleSortEnd}
+        axis="y"
       />
       <div className="flex items-center justify-center w-full mt-5 ">
         <BaseButton
@@ -57,14 +60,18 @@ const RenderListItems = SortableContainer(() => {
         <PlaylistSongCard
           key={song._id}
           active={currentSong?._id === song._id}
+          disabled={index === 0}
           playing={playing}
+          songIndex={index}
           index={index}
           song={song}
           onClick={() => {
-            dispatch(setCurrentSong(song));
+            dispatch(setCurrentSong({ song }));
           }}
           onWatchMV={() => {}}
-          onMoveToTop={() => {}}
+          onMoveToTop={() => {
+            dispatch(moveItemDnD({ from: index, to: 1 }));
+          }}
           onRemove={() => {
             dispatch(deleteSong({ id: song._id }));
           }}

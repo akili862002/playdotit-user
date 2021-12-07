@@ -1,12 +1,13 @@
 import IconButton from "components/IconButton";
 import SVG from "components/SVG";
-import { SortableElement } from "react-sortable-hoc";
+import { SortableElement, WrappedComponent } from "react-sortable-hoc";
 import { ISong } from "typings";
 import PlayingGif from "assets/gif/playing.gif";
 import PlayIcon from "assets/svg/player/white-play.svg";
 import "./styles.scss";
 
 interface IPlaylistSongCardProps {
+  songIndex: number;
   className?: string;
   song: ISong;
   active: boolean;
@@ -18,6 +19,7 @@ interface IPlaylistSongCardProps {
 }
 
 const PlaylistSongCard: React.FC<IPlaylistSongCardProps> = ({
+  songIndex,
   className = "",
   song,
   active,
@@ -53,7 +55,7 @@ const PlaylistSongCard: React.FC<IPlaylistSongCardProps> = ({
           {active && !playing && <PlayButton />}
         </div>
         <div className="flex flex-col gap-0.5 justify-center w-min">
-          <h5 className="overflow-hidden text-lg font-bold truncate sm:max-w-20 max-w-10 md:max-w-45">
+          <h5 className="overflow-hidden text-lg font-bold truncate max-w-10 md:max-w-45">
             {name}
           </h5>
           <p className="text-xs truncate text-gray">{author}</p>
@@ -78,7 +80,8 @@ const PlaylistSongCard: React.FC<IPlaylistSongCardProps> = ({
             <SVG name="card/trash" />
           </IconButton>
           <IconButton
-            tooltip="Move to top"
+            disable={songIndex < 2}
+            tooltip="Move to next song"
             onClick={e => {
               e.stopPropagation();
               onMoveToTop();
