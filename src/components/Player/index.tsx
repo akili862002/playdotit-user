@@ -96,7 +96,7 @@ const Player: React.FC<IPlayerProps> = () => {
           step={1}
           onChange={val => seekTo(val)}
         />
-        <div className="w-full mt-2 px-2 md:px-6">
+        <div className="w-full mt-2 px-2 md:px-7">
           <div className="flex flex-row items-center justify-between w-full">
             <IconButton
               tooltip="Shuffle"
