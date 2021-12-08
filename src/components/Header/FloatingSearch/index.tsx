@@ -3,13 +3,15 @@ import { Dialog as DialogUI, Transition } from "@headlessui/react";
 import SVG from "components/SVG";
 import { useDebounced } from "hooks/useDebounced";
 import axios, { AxiosResponse } from "axios";
-import { YOUTUBE_API_KEY } from "constants/env";
+import { YOUTUBE_API_KEY_1, YOUTUBE_API_KEY_2 } from "constants/env";
 import { ISong, IYoutubeSearchItem, IYoutubeSearchResponse } from "typings";
 import { useDispatch } from "react-redux";
 import { enqueueSongToPlaylist } from "redux/slices/playlist";
 import { randomId } from "util/random";
 import Spinner from "components/Spinner";
 import { htmlDecode } from "util/htmlDecode";
+import { toast } from "react-toastify";
+import useLocalStorage from "hooks/useLocalStorage";
 
 interface ILoginDialogProps {
   open: boolean;
@@ -76,19 +78,25 @@ const FloatingSearch = (
 export default FloatingSearch;
 
 const MainContent: React.FC<{ onClose: () => void }> = ({ onClose }) => {
+  var [apiKey, setApiKey] = useLocalStorage("YoutubeAPIKey", YOUTUBE_API_KEY_1);
   const dispatch = useDispatch();
   const [loading, setLoading] = useState(false);
   const { searchResults, inputText, setInputText } =
-    useDebounced<IYoutubeSearchItem>(async text => {
+    useDebounced<IYoutubeSearchItem>(async function searchYoutubeAPI(text) {
       if (!text) return [];
       try {
         const response: AxiosResponse<IYoutubeSearchResponse> = await axios.get(
-          `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=6&q=${text}&type=video&key=${YOUTUBE_API_KEY}`,
+          `https://www.googleapis.com/youtube/v3/search?part=snippet&maxResults=6&q=${text}&type=video&key=${apiKey}`,
         );
         setLoading(false);
         return response?.data?.items;
       } catch (error) {
-        console.error(error);
+        toast.error("Something was wrong!. Please refresh the page.", {
+          autoClose: false,
+        });
+        setApiKey(
+          apiKey === YOUTUBE_API_KEY_1 ? YOUTUBE_API_KEY_2 : YOUTUBE_API_KEY_1,
+        );
         setLoading(false);
         return [];
       }
