@@ -10,7 +10,7 @@ interface IHeaderProps {}
 
 const Header: React.FC<IHeaderProps> = props => {
   return (
-    <header className="max-w-md w-full h-5.5 flex flex-row justify-between items-center">
+    <header className="max-w-md w-full px-1 h-5.5 flex flex-row justify-between items-center">
       <a href="/">
         <SVG name="common/logo" className="w-auto h-3" />
       </a>

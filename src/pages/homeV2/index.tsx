@@ -22,6 +22,7 @@ const HomeV2: React.FC<IHomeV2Props> = props => {
     const listPlaylist: IPlaylist[] = [];
     const allLocalStorage = { ...window.localStorage };
     for (let key in allLocalStorage) {
+      if (key === "YoutubeAPIKey") continue;
       listPlaylist.push(JSON.parse(allLocalStorage[key]));
     }
     setListPlaylist(listPlaylist);

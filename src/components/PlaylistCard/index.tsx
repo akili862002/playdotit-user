@@ -15,7 +15,7 @@ const PlaylistCard: React.FC<IPlaylistCardProps> = ({
 }) => {
   const { name, songs } = playlist;
 
-  const image = songs[0]?.thumbnail || SkeletonImage;
+  const image = songs?.[0]?.thumbnail || SkeletonImage;
 
   return (
     <div className="w-full cursor-pointer group" onClick={onClick}>
