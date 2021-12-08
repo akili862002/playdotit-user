@@ -25,7 +25,8 @@ const QueueSongs: React.FC<IQueueSongsProps> = ({ match }) => {
     lastDndTime = Date.now();
     if(newIndex === 0) {
       if(playing) {
-        return toast.error("Cannot replace the playing song!");
+        toast.error("Cannot replace the playing song!");
+        return;
       }
     }
     dispatch(moveItemDnD({ from: oldIndex, to: newIndex }));
