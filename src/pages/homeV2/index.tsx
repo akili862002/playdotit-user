@@ -15,6 +15,7 @@ interface IHomeV2Props {}
 
 const HomeV2: React.FC<IHomeV2Props> = props => {
   const [listPlaylist, setListPlaylist] = useState<IPlaylist[]>([]);
+  const [bool, reRender] = useState(false);
   const history = useHistory();
 
   useEffect(() => {
@@ -24,7 +25,7 @@ const HomeV2: React.FC<IHomeV2Props> = props => {
       listPlaylist.push(JSON.parse(allLocalStorage[key]));
     }
     setListPlaylist(listPlaylist);
-  }, []);
+  }, [bool]);
 
   return (
     <div className="mt-7">
@@ -38,7 +39,11 @@ const HomeV2: React.FC<IHomeV2Props> = props => {
             onClick={() => {
               history.push(`/playlist/${playlist._id}`);
             }}
-            onRemove={() => {}}
+            onRemove={() => {
+              console.log("Remove ", playlist._id);
+              window.localStorage.removeItem(playlist._id);
+              reRender(!bool);
+            }}
           />
         ))}
         <AddPlaylistCard />

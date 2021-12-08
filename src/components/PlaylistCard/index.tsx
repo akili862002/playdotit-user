@@ -16,7 +16,7 @@ const PlaylistCard: React.FC<IPlaylistCardProps> = ({
 }) => {
   const { name } = playlist;
   return (
-    <BaseButton className="w-full cursor-pointer group">
+    <div className="w-full cursor-pointer group">
       <div className="relative w-full overflow-hidden shadow-sm aspect-w-1 aspect-h-1 rounded-15">
         <img
           className="absolute object-cover duration-300 transform group-hover:scale-110"
@@ -24,7 +24,7 @@ const PlaylistCard: React.FC<IPlaylistCardProps> = ({
           alt={name}
         />
         <div className="absolute inset-0 w-full h-full bg-black bg-opacity-30">
-          <div
+          <button
             className="absolute transform -translate-x-1/2 -translate-y-1/2 left-1/4 top-1/2 hover:opacity-60"
             onClick={e => {
               e.stopPropagation();
@@ -32,7 +32,7 @@ const PlaylistCard: React.FC<IPlaylistCardProps> = ({
             }}
           >
             <SVG name="playlist/remove" className="w-2.5 h-2.5" />
-          </div>
+          </button>
           <div
             className="absolute transform -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2 hover:opacity-60"
             onClick={onClick}
@@ -42,7 +42,7 @@ const PlaylistCard: React.FC<IPlaylistCardProps> = ({
         </div>
       </div>
       <h2 className="mt-1 text-lg font-semibold text-center">{name}</h2>
-    </BaseButton>
+    </div>
   );
 };
 
