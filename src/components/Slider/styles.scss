@@ -26,7 +26,7 @@ input.slider {
     @apply w-1.5 h-1.5 rounded-full cursor-pointer bg-black;
     border: none;
     &:active {
-      transform: scale(0.9), translateY(calc(-50% * 0.9));
+      transform: scale(0.9);
     }
   }
 }
