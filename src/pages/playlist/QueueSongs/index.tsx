@@ -1,7 +1,6 @@
 import PlaylistSongCard from "components/PlaylistSongCard";
 import { SortableContainer, SortEnd } from "react-sortable-hoc";
 import ListLayout from "layouts/List";
-import { IPlaylist } from "typings";
 import { RouteComponentProps, withRouter } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { IRootState } from "redux/store";

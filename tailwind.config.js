@@ -30,6 +30,8 @@ module.exports = {
       gray: "#6b7589",
       silver: "#a4abb8",
       "alice-blue": "#f3f5f7",
+      danger: "red",
+      "danger-light": "#ff080821",
     },
     fontSize: {
       DEFAULT: "16px",
@@ -61,6 +63,7 @@ module.exports = {
     spacing,
     boxShadow: {
       md: "0px 2px 13px rgba(73, 72, 106, 0.18)",
+      sm: "0px 5px 19px rgba(17, 12, 46, 0.23)",
     },
     maxWidth: {
       md: "800px",

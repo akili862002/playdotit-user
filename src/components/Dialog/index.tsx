@@ -63,7 +63,7 @@ const Dialog = (props: PropsWithChildren<ILoginDialogProps>): JSX.Element => {
           >
             <div
               className={`
-              inline-block text-left align-middle transition-all transform 
+              inline-block text-left align-middle transition-all transform w-full rounded-15 p-2  bg-white max-w-sm
               ${sizes[size]}
               ${className}
             `}

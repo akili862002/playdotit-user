@@ -1,11 +1,12 @@
 import Player from "components/Player";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import PlayingGif from "assets/gif/playing.gif";
 import PlayIcon from "assets/svg/player/white-play.svg";
 import { useSelector } from "react-redux";
 import { IRootState } from "redux/store";
 import SongSkeletonImage from "assets/jpg/skeleton.jpg";
 import { setPlaying } from "redux/slices/playlist";
+import { useTitle } from "hooks/useTitle";
 
 interface IMusicPlayerProps {}
 
@@ -13,6 +14,12 @@ const MusicPlayer: React.FC<IMusicPlayerProps> = props => {
   const { playlist, currentSong, playing } = useSelector(
     (state: IRootState) => state.playlist,
   );
+
+  const { setTitle } = useTitle();
+
+  useEffect(() => {
+    setTitle(currentSong?.name || "");
+  }, [currentSong]);
 
   return (
     <section className="grid w-full grid-cols-12 gap-2 ">
