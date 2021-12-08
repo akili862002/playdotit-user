@@ -41,6 +41,13 @@ const Player: React.FC<IPlayerProps> = () => {
       if (isSync) {
         return;
       }
+      if(playlist.songs.length == 1) {
+        dispatch(
+          setPlaying(false)
+        );
+        setPlayedSeconds(0)
+        return;
+      }
       if (isShuffle) {
         const newSongIndex = getRandomInt(1, playlist.songs.length - 1);
         dispatch(setCurrentSong({ song: playlist.songs[newSongIndex] }));
@@ -49,7 +56,7 @@ const Player: React.FC<IPlayerProps> = () => {
       dispatch(
         setCurrentSong({
           song:
-            playlist.songs.length > 1 ? playlist.songs[1] : playlist.songs[0],
+            playlist.songs[1],
         }),
       );
     }, 2000);
