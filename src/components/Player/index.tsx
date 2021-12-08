@@ -45,7 +45,7 @@ const Player: React.FC<IPlayerProps> = () => {
         dispatch(
           setPlaying(false)
         );
-        setPlayedSeconds(0)
+        seekTo(0);
         return;
       }
       if (isShuffle) {
