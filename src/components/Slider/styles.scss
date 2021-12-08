@@ -1,5 +1,6 @@
 input.slider {
   width: 100%;
+  height: 100%;
   -webkit-appearance: none;
   background: none;
 
@@ -17,6 +18,15 @@ input.slider {
     @apply w-1.5 h-1.5  rounded-full cursor-pointer bg-black;
     &:active {
       transform: scale(0.9);
+    }
+  }
+  /* Firefox */
+  &::-moz-range-thumb {
+    -webkit-appearance: none;
+    @apply w-1.5 h-1.5 rounded-full cursor-pointer bg-black;
+    border: none;
+    &:active {
+      transform: scale(0.9), translateY(calc(-50% * 0.9));
     }
   }
 }
