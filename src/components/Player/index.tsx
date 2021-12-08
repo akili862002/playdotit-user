@@ -41,10 +41,8 @@ const Player: React.FC<IPlayerProps> = () => {
       if (isSync) {
         return;
       }
-      if(playlist.songs.length == 1) {
-        dispatch(
-          setPlaying(false)
-        );
+      if (playlist.songs.length == 1) {
+        dispatch(setPlaying(false));
         seekTo(0);
         return;
       }
@@ -55,8 +53,7 @@ const Player: React.FC<IPlayerProps> = () => {
       }
       dispatch(
         setCurrentSong({
-          song:
-            playlist.songs[1],
+          song: playlist.songs[1],
         }),
       );
     }, 2000);
@@ -103,7 +100,7 @@ const Player: React.FC<IPlayerProps> = () => {
           step={1}
           onChange={val => seekTo(val)}
         />
-        <div className="w-full mt-2 sm:px-2 md:px-7">
+        <div className="w-full px-2 mt-2 md:px-7">
           <div className="flex flex-row items-center justify-between w-full">
             <IconButton
               tooltip="Shuffle"
@@ -123,7 +120,7 @@ const Player: React.FC<IPlayerProps> = () => {
                 dispatch(setPlaying(!playing));
               }}
             >
-              {loading ? (
+              {loading && currentSong ? (
                 <Spinner />
               ) : (
                 <SVG

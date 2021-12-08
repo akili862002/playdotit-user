@@ -93,7 +93,10 @@ const AddPlaylistCard: React.FC<{}> = props => {
             <TextField label="Playlist name" name="name" />
 
             <div className="flex flex-row justify-end w-full gap-2 mt-3 font-bold text-md">
-              <BaseButton className="px-2 py-1 font-bold text-black bg-alice-blue rounded-8">
+              <BaseButton
+                onClick={() => setIsOpenDialog(false)}
+                className="px-2 py-1 font-bold text-black bg-alice-blue rounded-8"
+              >
                 Close
               </BaseButton>
               <BaseButton

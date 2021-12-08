@@ -97,6 +97,11 @@ export const playlistSlices = createSlice({
       );
       saveDataToLocalStorage(state.playlist._id, state.playlist);
     },
+    renamePlaylist: (state, action: PayloadAction<string>) => {
+      state.playlist.name = action.payload;
+      saveDataToLocalStorage(state.playlist._id, state.playlist);
+    },
+
     savePlaylist: state => {
       saveDataToLocalStorage(state.playlist._id, state.playlist);
     },
@@ -117,6 +122,7 @@ export const {
   enqueueSongToPlaylist,
   moveItemDnD,
   deleteSong,
+  renamePlaylist,
   savePlaylist,
 } = playlistSlices.actions;
 

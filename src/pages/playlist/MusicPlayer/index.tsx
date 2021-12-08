@@ -1,19 +1,22 @@
 import Player from "components/Player";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import PlayingGif from "assets/gif/playing.gif";
 import PlayIcon from "assets/svg/player/white-play.svg";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { IRootState } from "redux/store";
 import SongSkeletonImage from "assets/jpg/skeleton.jpg";
-import { setPlaying } from "redux/slices/playlist";
+import { renamePlaylist, setPlaying } from "redux/slices/playlist";
 import { useTitle } from "hooks/useTitle";
+import { toast } from "react-toastify";
 
 interface IMusicPlayerProps {}
 
 const MusicPlayer: React.FC<IMusicPlayerProps> = props => {
+  const dispatch = useDispatch();
   const { playlist, currentSong, playing } = useSelector(
     (state: IRootState) => state.playlist,
   );
+  const playlistNameRef = useRef<HTMLInputElement>(null);
 
   const { setTitle } = useTitle();
 
@@ -50,7 +53,24 @@ const MusicPlayer: React.FC<IMusicPlayerProps> = props => {
             />
           )}
         </div>
-        <h1 className="mt-1.5 text-3xl font-bold">{playlist?.name}</h1>
+        <input
+          ref={playlistNameRef}
+          type="text"
+          className="mt-1.5 text-3xl font-bold text-center"
+          defaultValue={playlist?.name}
+          onBlur={() => {
+            if (!playlistNameRef.current?.value) return;
+
+            const val = playlistNameRef.current?.value || "";
+            if (!val || val.length > 20) {
+              toast.error("Invalid playlist name!");
+              playlistNameRef.current.value = playlist.name;
+              return;
+            }
+
+            dispatch(renamePlaylist(val));
+          }}
+        />
       </div>
       <div className="flex flex-col justify-between w-full col-span-8">
         <div>

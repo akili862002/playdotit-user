@@ -1,7 +1,6 @@
-import BaseButton from "components/BaseButton";
-import IconButton from "components/IconButton";
 import SVG from "components/SVG";
 import { IPlaylist } from "typings";
+import SkeletonImage from "assets/jpg/skeleton.jpg";
 
 interface IPlaylistCardProps {
   playlist: IPlaylist;
@@ -14,16 +13,18 @@ const PlaylistCard: React.FC<IPlaylistCardProps> = ({
   onClick,
   onRemove,
 }) => {
-  const { name } = playlist;
+  const { name, songs } = playlist;
+
+  const image = songs[0]?.thumbnail || SkeletonImage;
+
   return (
-    <div className="w-full cursor-pointer group">
+    <div className="w-full cursor-pointer group" onClick={onClick}>
       <div className="relative w-full overflow-hidden shadow-sm aspect-w-1 aspect-h-1 rounded-15">
         <img
           className="absolute object-cover duration-300 transform group-hover:scale-110"
-          src="https://i.ytimg.com/vi/L3wKzyIN1yk/maxresdefault.jpg"
-          alt={name}
+          src={image}
         />
-        <div className="absolute inset-0 w-full h-full bg-black bg-opacity-30">
+        <div className="absolute inset-0 hidden w-full h-full bg-black group-hover:block bg-opacity-30">
           <button
             className="absolute transform -translate-x-1/2 -translate-y-1/2 left-1/4 top-1/2 hover:opacity-60"
             onClick={e => {
@@ -33,10 +34,7 @@ const PlaylistCard: React.FC<IPlaylistCardProps> = ({
           >
             <SVG name="playlist/remove" className="w-2.5 h-2.5" />
           </button>
-          <div
-            className="absolute transform -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2 hover:opacity-60"
-            onClick={onClick}
-          >
+          <div className="absolute transform -translate-x-1/2 -translate-y-1/2 left-1/2 top-1/2 hover:opacity-60">
             <SVG name="playlist/play" className="w-5 h-5" />
           </div>
         </div>
