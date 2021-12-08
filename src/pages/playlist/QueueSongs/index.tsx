@@ -12,8 +12,6 @@ import { toast } from "react-toastify";
 
 interface IQueueSongsProps extends RouteComponentProps {}
 
-let lastDndTime: number = 0;
-
 const QueueSongs: React.FC<IQueueSongsProps> = ({ match }) => {
   const { playlist, playing } = useSelector(
     (state: IRootState) => state.playlist,
@@ -21,16 +19,13 @@ const QueueSongs: React.FC<IQueueSongsProps> = ({ match }) => {
   const dispatch = useDispatch();
 
   const handleSortEnd = ({ oldIndex, newIndex }: SortEnd) => {
-    lastDndTime = Date.now();
-    if(newIndex === 0 && playing) {
+    if (newIndex === 0 && playing) {
       toast.error("Cannot replace the playing song!");
       return;
     }
     dispatch(moveItemDnD({ from: oldIndex, to: newIndex }));
-    if(newIndex === 0) {
-      dispatch(
-        setCurrentSong({ song: playlist.songs[oldIndex] })
-      );
+    if (newIndex === 0) {
+      dispatch(setCurrentSong({ song: playlist.songs[oldIndex] }));
     }
   };
 
@@ -79,7 +74,6 @@ const RenderListItems = SortableContainer(() => {
           index={index}
           song={song}
           onClick={() => {
-            if(lastDndTime - Date.now() < 100) return;
             dispatch(setCurrentSong({ song }));
           }}
           onWatchMV={() => {}}
