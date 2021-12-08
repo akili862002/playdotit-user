@@ -56,7 +56,7 @@ const MusicPlayer: React.FC<IMusicPlayerProps> = props => {
         <div>
           <h2
             className="text-5xl font-bold paragraph-with-2-line"
-            style={{ lineHeight: "1.1" }}
+            style={{ lineHeight: "1.3" }}
           >
             {currentSong?.name || "Waiting..."}
           </h2>
