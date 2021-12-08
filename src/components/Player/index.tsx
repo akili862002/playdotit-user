@@ -59,6 +59,30 @@ const Player: React.FC<IPlayerProps> = () => {
     }, 2000);
   };
 
+const handleNextSong = () => {
+  if(playlist.songs.length === 0) return;
+  dispatch(
+    setCurrentSong({
+      song: playlist.songs[1 % playlist.songs.length]
+    })
+  )
+}
+
+const handlePreviousSong = () => {
+  if(playlist.songs.length === 0) return;
+  let i = 0;
+  const interval = setInterval(() => {
+    dispatch(
+      setCurrentSong({
+        song: playlist.songs[++i % playlist.songs.length]
+      })
+    );
+    if(i === playlist.songs.length - 1) {
+      clearInterval(interval);
+    }
+  }, 0);
+}
+
   return (
     <div className="relative w-full">
       <div className="absolute w-1 h-1 opacity-0 pointer-events-none">
@@ -110,7 +134,10 @@ const Player: React.FC<IPlayerProps> = () => {
                 className={isShuffle ? "text-black" : "text-silver"}
               />
             </IconButton>
-            <IconButton tooltip="Previous">
+            <IconButton
+              tooltip="Previous"
+              onClick={handlePreviousSong}
+            >
               <SVG name="player/prev" />
             </IconButton>
             <BaseButton
@@ -129,7 +156,10 @@ const Player: React.FC<IPlayerProps> = () => {
                 />
               )}
             </BaseButton>
-            <IconButton tooltip="Next">
+            <IconButton
+              tooltip="Next"
+              onClick={handleNextSong}
+            >
               <SVG name="player/next" />
             </IconButton>
             <IconButton
