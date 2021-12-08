@@ -13,7 +13,6 @@ import { toast } from "react-toastify";
 interface IQueueSongsProps extends RouteComponentProps {}
 
 let lastDndTime: number = 0;
-console.log(lastDndTime);
 
 const QueueSongs: React.FC<IQueueSongsProps> = ({ match }) => {
   const { playlist, playing } = useSelector(
