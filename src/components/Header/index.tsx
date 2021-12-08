@@ -9,7 +9,7 @@ interface IHeaderProps {}
 
 const Header: React.FC<IHeaderProps> = props => {
   return (
-    <header className="max-w-md w-full h-5.5 flex flex-row justify-between items-center">
+    <header className="max-w-md w-full px-1 h-5.5 flex flex-row justify-between items-center">
       <a href="/">
         <SVG name="common/logo" className="w-auto h-3" />
       </a>
@@ -30,7 +30,7 @@ const SearchBox: React.FC<{}> = props => {
     <>
       <div
         onClick={() => dispatch(setOpenFloatingSearch(true))}
-        className="cursor-pointer bg-alice-blue  text-sm text-silver w-7/12 flex flex-row items-center px-1 py-0.5 gap-1.5 rounded-4"
+        className="cursor-pointer bg-alice-blue text-sm text-silver w-7/12 flex flex-row items-center px-1 py-0.5 gap-1.5 rounded-4"
       >
         <SVG name="common/search" className="search-box__icon" />
         <p className="placeholder">Find my song</p>
