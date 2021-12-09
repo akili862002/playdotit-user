@@ -28,12 +28,27 @@ export class Queue<T> {
     return this.arr[this.arr.length - 1];
   }
 
+  push(item: T) {
+    this.arr.push(item);
+  }
+
+  length(): number {
+    return this.arr?.length;
+  }
+
+  findIndex(cb: (item: T) => boolean): number {
+    return this.arr.findIndex(cb);
+  }
+
+  removeItem(cb: (item: T) => boolean) {
+    this.arr = this.arr.filter(item => !cb(item));
+  }
+
   // Addition funcs
-  arrayMove(from: number, to: number): boolean {
+  arrayMove(from: number, to: number) {
     if (from < 0 && to > this.arr.length - 1) {
       throw new Error("From or To is out of array!");
     }
     this.arr = arrayMoveUtil(this.arr, from, to);
-    return true;
   }
 }

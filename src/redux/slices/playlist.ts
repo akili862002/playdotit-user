@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { stringify } from "querystring";
 import { toast } from "react-toastify";
 import { IPlaylist, ISong } from "typings";
 import { arrayMove } from "util/arrayMove";
+import { Queue } from "util/queue";
 
 interface IPlaylistState {
   playlist: IPlaylist;
@@ -65,8 +65,10 @@ export const playlistSlices = createSlice({
     },
     enqueueSongToPlaylist: (state, action: PayloadAction<ISong>) => {
       if (!state.playlist?.songs) return;
+      const queue = new Queue(state.playlist.songs);
+
       if (
-        state.playlist.songs.findIndex(
+        queue.findIndex(
           item => item.youtubeURL === action.payload.youtubeURL,
         ) >= 0
       ) {
@@ -74,27 +76,22 @@ export const playlistSlices = createSlice({
         return;
       }
 
-      state.playlist.songs.push(action.payload);
+      queue.push(action.payload);
       saveDataToLocalStorage(state.playlist._id, state.playlist);
     },
     moveItemDnD: (
       state,
       action: PayloadAction<{ from: number; to: number }>,
     ) => {
-      try {
-        const { from, to } = action.payload;
-        state.playlist.songs = arrayMove(state.playlist.songs, from, to);
-
-        console.log("Saved!");
-        saveDataToLocalStorage(state.playlist._id, state.playlist);
-      } catch (error) {
-        console.error(error);
-      }
+      const queue = new Queue(state.playlist.songs);
+      const { from, to } = action.payload;
+      queue.arrayMove(from, to);
+      state.playlist.songs = queue.arr;
+      saveDataToLocalStorage(state.playlist._id, state.playlist);
     },
     deleteSong: (state, action: PayloadAction<{ id: string }>) => {
-      state.playlist.songs = state.playlist.songs.filter(
-        song => song._id !== action.payload.id,
-      );
+      const queue = new Queue(state.playlist.songs);
+      queue.removeItem(song => song._id !== action.payload.id);
       saveDataToLocalStorage(state.playlist._id, state.playlist);
     },
     renamePlaylist: (state, action: PayloadAction<string>) => {
@@ -109,7 +106,6 @@ export const playlistSlices = createSlice({
 });
 
 const saveDataToLocalStorage = (key: string, playlist: IPlaylist) => {
-  console.log(key);
   window.localStorage.setItem(key || "1234-234", JSON.stringify(playlist));
 };
 
