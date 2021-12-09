@@ -1,3 +1,3 @@
-export const YOUTUBE_API_KEY = "AIzaSyAtTE0JpaOUEpUGW_f-I1FX6Hb64rYhPZU";
-export const YOUTUBE_API_KEY_1 = "AIzaSyAtTE0JpaOUEpUGW_f-I1FX6Hb64rYhPZU";
-export const YOUTUBE_API_KEY_2 = "AIzaSyBPesVQ0_0dmXSwbRVO_2QytzNVBXETsjU";
+export const YOUTUBE_API_KEY = "AIzaSyCZkpFLUQ8RVXMBSGfaq9MvXwlXKubTg7I";
+export const YOUTUBE_API_KEY_1 = "AIzaSyBCDWV74ZsM12PmZdDiZatf1MmspjpOruk";
+export const YOUTUBE_API_KEY_2 = "AIzaSyCZkpFLUQ8RVXMBSGfaq9MvXwlXKubTg7I";
