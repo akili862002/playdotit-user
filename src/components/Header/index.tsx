@@ -22,10 +22,6 @@ const Header: React.FC<IHeaderProps> = props => {
 export default Header;
 
 const SearchBox: React.FC<{}> = props => {
-  const history = useHistory();
-
-  const isHomePage = history.location.pathname === "/";
-
   const dispatch = useDispatch();
   const { isOpenFloatingSearch } = useSelector(
     (state: IRootState) => state.common,
@@ -34,7 +30,7 @@ const SearchBox: React.FC<{}> = props => {
   return (
     <>
       <div
-        onClick={() => !isHomePage && dispatch(setOpenFloatingSearch(true))}
+        onClick={() => dispatch(setOpenFloatingSearch(true))}
         className="cursor-pointer bg-alice-blue  text-sm text-silver w-7/12 flex flex-row items-center px-1 py-0.5 gap-1.5 rounded-4"
       >
         <SVG name="common/search" className="search-box__icon" />
