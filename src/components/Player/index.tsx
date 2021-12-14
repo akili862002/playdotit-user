@@ -36,7 +36,6 @@ const Player: React.FC<IPlayerProps> = () => {
   };
 
   const handleEndedSong = () => {
-    console.log("Song is end!");
     setTimeout(() => {
       if (isSync) {
         return;
@@ -59,29 +58,29 @@ const Player: React.FC<IPlayerProps> = () => {
     }, 2000);
   };
 
-const handleNextSong = () => {
-  if(playlist.songs.length === 0) return;
-  dispatch(
-    setCurrentSong({
-      song: playlist.songs[1 % playlist.songs.length]
-    })
-  )
-}
-
-const handlePreviousSong = () => {
-  if(playlist.songs.length === 0) return;
-  let i = 0;
-  const interval = setInterval(() => {
+  const handleNextSong = () => {
+    if (playlist.songs.length === 0) return;
     dispatch(
       setCurrentSong({
-        song: playlist.songs[++i % playlist.songs.length]
-      })
+        song: playlist.songs[1 % playlist.songs.length],
+      }),
     );
-    if(i === playlist.songs.length - 1) {
-      clearInterval(interval);
-    }
-  }, 0);
-}
+  };
+
+  const handlePreviousSong = () => {
+    if (playlist.songs.length === 0) return;
+    let i = 0;
+    const interval = setInterval(() => {
+      dispatch(
+        setCurrentSong({
+          song: playlist.songs[++i % playlist.songs.length],
+        }),
+      );
+      if (i === playlist.songs.length - 1) {
+        clearInterval(interval);
+      }
+    }, 0);
+  };
 
   return (
     <div className="relative w-full">
@@ -96,7 +95,6 @@ const handlePreviousSong = () => {
           loop={isSync}
           pip={false}
           onReady={({ getDuration }) => {
-            console.log("Ready!");
             setDuration(getDuration());
             setLoading(false);
           }}
@@ -134,10 +132,7 @@ const handlePreviousSong = () => {
                 className={isShuffle ? "text-black" : "text-silver"}
               />
             </IconButton>
-            <IconButton
-              tooltip="Previous"
-              onClick={handlePreviousSong}
-            >
+            <IconButton tooltip="Previous" onClick={handlePreviousSong}>
               <SVG name="player/prev" />
             </IconButton>
             <BaseButton
@@ -156,10 +151,7 @@ const handlePreviousSong = () => {
                 />
               )}
             </BaseButton>
-            <IconButton
-              tooltip="Next"
-              onClick={handleNextSong}
-            >
+            <IconButton tooltip="Next" onClick={handleNextSong}>
               <SVG name="player/next" />
             </IconButton>
             <IconButton

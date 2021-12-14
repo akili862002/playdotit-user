@@ -47,7 +47,6 @@ const MusicPlayer: React.FC<IMusicPlayerProps> = props => {
           ) : (
             <PlayButton
               onClick={() => {
-                console.log("Click");
                 currentSong && setPlaying(true);
               }}
             />

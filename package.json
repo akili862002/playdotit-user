@@ -1,5 +1,10 @@
 {
   "name": "play.it",
+  "author": {
+    "email": "dung862002@gmail.com",
+    "name": "Dung Nguyen",
+    "url": "https://www.facebook.com/rengar.the/"
+  },
   "version": "0.1.0",
   "private": true,
   "dependencies": {
