@@ -1,0 +1,184 @@
+{
+  "New Tsx": {
+    "prefix": [
+      "~tsx",
+      "!tsx"
+    ],
+    "body": [
+      "interface I${1:Component}Props {  }",
+      "",
+      "const ${1:Component}: React.FC<I${1:Component}Props> = (props) => {",
+      "",
+      "  return (",
+      "    <${2:div}>",
+      "    ",
+      "    </${2:div}>",
+      "  )",
+      "}",
+      "",
+      "export default ${1:Component};"
+    ],
+    "description": "Create a new Component"
+  },
+  "Add TSX": {
+    "prefix": [
+      "~atsx",
+      "!atsx"
+    ],
+    "body": [
+      "const ${1:Component}: React.FC<{}> = (props) => {",
+      "",
+      "  return (",
+      "    <${2:div}>",
+      "    ",
+      "    </${2:div}>",
+      "  )",
+      "}"
+    ],
+    "description": "Add a new Component"
+  },
+  "Add icon": {
+    "prefix": [
+      "~icon",
+      "!icon",
+      "~aicon",
+      "!aicon"
+    ],
+    "body": [
+      "export const ${1:Component}Icon: React.FC<IIconSVGProps> = props => (",
+      "  ${2}",
+      ")"
+    ],
+    "description": "Add icon"
+  },
+  "Add Slices": {
+    "prefix": [
+      "~slice",
+      "!slice"
+    ],
+    "body": [
+      "import { createSlice, PayloadAction } from \"@reduxjs/toolkit\";",
+      "",
+      "interface I${1}State {",
+      "  ",
+      "};",
+      "",
+      "const initialState: I${1}State = {",
+      "  ",
+      "};",
+      "",
+      "export const ${2}Slice = createSlice({",
+      "  name: \"${2}\",",
+      "  initialState,",
+      "  reducers: {",
+      "    ",
+      "  },",
+      "});",
+      "",
+      "// Actions",
+      "export const {} = ${2}Slice.actions;",
+      "",
+      "export default ${2}Slice.reducer;"
+    ]
+  },
+  "Add reducer": {
+    "prefix": [
+      "~areducer",
+      "!areducer"
+    ],
+    "body": [
+      "${1}: (state, action: PayloadAction<${2}>) => {",
+      "  ${3}",
+      "},"
+    ]
+  },
+  "New dialog": {
+    "prefix": [
+      "!dialog"
+    ],
+    "body": [
+      "import { alertBar, AlertBar, Dialog, sleep } from '@gogobei/feature';",
+      "import EventEmitter from 'events';",
+      "import { useEffect, useState } from 'react';",
+      "",
+      "const event = new EventEmitter();",
+      "const SHOW_DIALOG = 'SHOW_DIALOG';",
+      "const CLOSE_DIALOG = 'CLOSE_DIALOG';",
+      "const REQUEST_INFO = 'REQUEST_INFO';",
+      "",
+      "interface IShow${1}DialogPayload {}",
+      "interface IShow${1}DialogPropResult {}",
+      "",
+      "export const show${1}Dialog = (",
+      "  payload: IShow${1}DialogPayload",
+      ") => {",
+      "  return new Promise<IShow${1}DialogPropResult>((resolve) => {",
+      "    event.emit(SHOW_DIALOG, payload);",
+      "    event.on(CLOSE_DIALOG, (result) => {",
+      "      resolve(result);",
+      "    });",
+      "  });",
+      "};",
+      "",
+      "export const ${1}Dialog: React.FC = () => {",
+      "  const [open, setOpen] = useState(false);",
+      "  const [payload, setPayload] = useState<",
+      "    IShow${1}DialogPayload | undefined",
+      "  >();",
+      "  const [loading, setLoading] = useState(false);",
+      "",
+      "  useEffect(() => {",
+      "    event.on(SHOW_DIALOG, (payload) => {",
+      "      setPayload(payload);",
+      "      setOpen(true);",
+      "    });",
+      "  }, []);",
+      "",
+      "  const handleClose = (result: IShow${1}DialogPropResult | null) => {",
+      "    setOpen(false);",
+      "    event.emit(CLOSE_DIALOG, result);",
+      "  };",
+      "",
+      "  const handleAccept = async () => {",
+      "    try {",
+      "      setLoading(true);",
+      "",
+      "      // YOUR CALL API HERE",
+      "",
+      "    } catch (error) {",
+      "      console.log(error);",
+      "      alertBar(REQUEST_INFO, {",
+      "        type: 'error',",
+      "        message: 'Something wrong was happened! please try later!',",
+      "      });",
+      "    } finally {",
+      "      setLoading(false);",
+      "    }",
+      "  };",
+      "",
+      "  return (",
+      "    <Dialog open={open} onClose={() => handleClose(null)}>",
+      "      <Dialog.Header title='Request info' />",
+      "      <Dialog.Content>",
+      "        <AlertBar id={REQUEST_INFO} />",
+      "        Content",
+      "      </Dialog.Content>",
+      "      <Dialog.ActionButtons>",
+      "        <Dialog.ButtonCancel>Cancel</Dialog.ButtonCancel>",
+      "        <Dialog.ButtonAccept loading={loading} onClick={handleAccept}>",
+      "          Accept",
+      "        </Dialog.ButtonAccept>",
+      "      </Dialog.ActionButtons>",
+      "    </Dialog>",
+      "  );",
+      "};"
+    ]
+  },
+  "Add dispatch & select from redux": {
+    "prefix": "!select",
+    "body": [
+      "const dispatch = useAppDispatch();",
+      "const { } = useAppSelector(state => state.${1});"
+    ]
+  }
+}

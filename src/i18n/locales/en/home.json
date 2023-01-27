@@ -1,0 +1,9 @@
+{
+  "my-playlists": "My playlists",
+  "create-playlist": "Create a playlist",
+  "playlist-name": "Playlist's name",
+  "delete-alert": {
+    "title": "Delete playlist",
+    "message": "Are you sure you want to delete your playlist? All data will be permanently removed. This action cannot be undone!"
+  }
+}

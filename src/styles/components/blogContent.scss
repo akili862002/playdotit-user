@@ -1,0 +1,32 @@
+.blog-content {
+  @apply text-md font-normal;
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply text-lg font-semibold pb-1;
+  }
+
+  ul {
+    @apply pl-2 list-disc pt-0.5 mb-1 flex flex-col gap-1;
+    li {
+      @apply flex flex-row items-center;
+    }
+  }
+
+  table {
+    @apply w-full;
+  }
+
+  kbd {
+    @apply text-white h-2.5 text-center flex items-center justify-center text-sm  bg-gray rounded-4;
+    padding: 0 8px;
+
+    svg,
+    img {
+      width: 16px;
+      height: 16px;
+    }
+  }
+}

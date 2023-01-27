@@ -1,0 +1,31 @@
+{
+  "delete": "Delete",
+  "create": "Create",
+  "confirm": "Confirm",
+  "cancel": "Cancel",
+  "finish": "Finish",
+  "required-field": "This field is required!",
+  "too-long": "Too long!",
+  "copyright": "Play.it is designed and created by",
+  "search-placeholder": "Search your song from Youtube",
+  "my-playlists": "My playlists",
+
+  "feedback": {
+    "title": "Feedback",
+    "sub-title": "Hello there, here is a form for you to give us feedback or report bugs about this application. Every feedback is welcomed and also is our source of motivation to improve the app. Thanks a lot!",
+    "desc": "Description",
+
+    "sending": "Sending your feedback...",
+    "sent-success": "Sent! Thank you for your feedback!",
+    "sent-fail": "Send feedback was failed!",
+
+    "error": {
+      "invalid-email": "Email is not valid!"
+    }
+  },
+
+  "shortcut": {
+    "title": "Shortcuts"
+  },
+  "copied-link": "Copy link successfully"
+}

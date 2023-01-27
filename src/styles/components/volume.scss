@@ -1,0 +1,13 @@
+.volume-container:hover .volume-float {
+  visibility: visible;
+  opacity: 1;
+
+  &::after {
+    content: "";
+    border-color: transparent transparent rgb(255, 255, 255) transparent;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-left: -4px;
+    @apply absolute transform border-4 border-solid bottom-full;
+  }
+}

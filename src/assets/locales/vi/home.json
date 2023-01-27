@@ -1,0 +1,9 @@
+{
+  "my-playlists": "Playlists của tôi",
+  "create-playlist": "Tạo playlist mới",
+  "playlist-name": "Tên playlist",
+  "delete-alert": {
+    "title": "Xoá playlist",
+    "message": "Bạn có chắc chắn muốn xoá playlist này không?. Tất cả dữ liệu sẽ bị xoá vĩnh viến và không thể khôi phục!"
+  }
+}

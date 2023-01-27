@@ -1,0 +1,33 @@
+{
+  "waiting": "Waiting...",
+  "select-your-music": "Please select your song",
+  "add-my-song": "Add my song",
+  "empty-alert-title": "Your playlist is empty now!",
+  "empty-alert-message": "Please click the button below to add your favorite songs ($1). Or add song from the suggestions",
+  "share-playlist": {
+    "button": "Share",
+    "title": "Share playlist",
+    "sub-title": "Share your playlist \"$1\" by this link to your friends!"
+  },
+
+  "shuffle": "Shuffle",
+  "sync": "Sync",
+  "prev": "Previous",
+  "next": "Next",
+
+  "download": "Download",
+  "remove": "Remove",
+  "add": "Add",
+  "move-to-next": "Add to next queue",
+
+  "confirm": "Confirm",
+  "report": "Report",
+
+  "suggestions": "Suggestions",
+  "loading": "Loading",
+  "refresh": "Refresh",
+
+  "error": {
+    "cannot-replace-playing-song": "Cannot replace the playing song!"
+  }
+}

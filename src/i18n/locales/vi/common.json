@@ -1,0 +1,31 @@
+{
+  "delete": "Xoá",
+  "create": "Khởi tạo",
+  "finish": "Xong",
+  "confirm": "Xác nhận",
+  "cancel": "Huỷ bỏ",
+  "required-field": "Vui lòng nhập ô này!",
+  "too-long": "Quá dài!",
+  "copyright": "Play.it được thiết kế và tạo bởi",
+  "search-placeholder": "Tìm bài hát của bạn từ Youtube",
+  "my-playlists": "Playlists của tôi",
+
+  "feedback": {
+    "title": "Phản hồi",
+    "sub-title": "Xin chào bạn, đây là nơi để bạn góp ý hoặc báo lỗi cho chúng tôi về ứng dụng này. Mọi ý kiến của bạn đểu là nguồn động lực của chúng tôi để cải thiện ứng dụng tốt hơn. Xin chân thành cảm ơn!",
+    "desc": "Nội dung",
+
+    "sending": "Đang gửi feedback của bạn...",
+    "sent-success": "Đã gửi! Cảm ơn phản hồi của bạn!",
+    "sent-fail": "Gửi phản hồi thất bại!",
+
+    "error": {
+      "invalid-email": "Email không hợp lệ!"
+    }
+  },
+
+  "shortcut": {
+    "title": "Phím tắt"
+  },
+  "copied-link": "Sao chép link thành công!"
+}

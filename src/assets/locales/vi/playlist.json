@@ -1,0 +1,32 @@
+{
+  "waiting": "Đang chờ...",
+  "select-your-music": "Vui lòng chọn nhạc...",
+  "add-my-song": "Thêm bài hát",
+  "empty-alert-title": "Playlist của bạn đang trống",
+  "empty-alert-message": "Vui lòng nhấn vào nút thêm bài bên dưới ($1) hoặc thêm ở mục gợi ý.",
+  "share-playlist": {
+    "button": "Chia sẻ",
+    "title": "Chia sẻ playlist",
+    "sub-title": "Chia sẻ playlist \"$1\" bằng link này tới bạn bè của bạn!"
+  },
+
+  "shuffle": "Phát ngẫu nhiên",
+  "sync": "Lặp bài",
+  "prev": "Bài trước",
+  "next": "Bài tiếp theo",
+
+  "download": "Tải nhạc",
+  "remove": "Xoá",
+  "add": "Thêm",
+  "move-to-next": "Phát vào bài sau",
+  "suggestions": "Gợi ý bài hát",
+  "loading": "Đang tải",
+  "refresh": "Làm mới",
+
+  "confirm": "Xác nhận",
+  "report": "Báo vi phạm",
+
+  "error": {
+    "cannot-replace-playing-song": "Không thể thay thế bài đang hát!"
+  }
+}

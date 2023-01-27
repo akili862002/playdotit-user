@@ -1,0 +1,6 @@
+.playlist-song-card {
+  &.object-dragging {
+    @apply shadow-md cursor-move bg-white dark:bg-light-dark;
+    cursor: move !important;
+  }
+}
